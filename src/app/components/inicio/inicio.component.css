@@ -1,0 +1,55 @@
+/* Controla sobre la barra de menu*/
+::ng-deep .p-menubar  { 
+    height: 4rem;
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 1rem; /* Espaciado interno */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    font-size: 16px;   
+}
+
+/*control de css para los lik del menu*/
+::ng-deep .p-menubar-item-link {
+  white-space:nowrap !important ;
+  height: 2rem;
+  border-radius: 1rem;
+
+}
+
+::ng-deep .p-menubar-item-link:hover{
+ color: rgb(255, 255, 255);
+ background: #8ba0b7;
+ border-radius: 1rem;
+ transition: 0.3s;
+}
+
+
+::ng-deep .p-menubar-item-icon:hover {
+  color: white !important; /* Cambia el color del icono directamente si se hace hover sobre él */
+}
+
+
+.user-name {
+  font-size: 0.7rem;
+  color: rgb(100, 100, 100);
+  margin-right: 0.2rem;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+  text-shadow: 10px 10px 200px rgba(450, 200, 400, 0.1); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

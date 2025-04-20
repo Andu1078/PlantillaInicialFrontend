@@ -1,0 +1,278 @@
+<p-toast></p-toast>
+<p-toolbar [style]="{'height':'3.7rem', 'background':'radial-gradient(circle, #1f34b1, #262f63)'}" *ngIf="puedeVerPagina">
+
+  <!-- LOGO a la izquierda -->
+  <ng-template pTemplate="start">
+    <img 
+      src="assets/Logo.png" 
+      width="38" 
+      height="38" 
+      alt="Logo" 
+      style="cursor: pointer;"
+      class="rounded-circle" 
+      (click)="irAInicio()" 
+      title="Ir al inicio"
+    />
+  </ng-template>
+
+  <!-- Título centrado -->
+  <ng-template pTemplate="center">
+    <span class="titulo-pagina fw-bold text-white">Gestión de Usuarios</span>
+  </ng-template>
+
+  <!-- Derecha vacía -->
+  <ng-template pTemplate="end">
+  </ng-template>
+
+</p-toolbar>
+
+<div class="border rounded mt-2 mb-4 shadow pt-2 pb-2" id="ContenedorUsuario" *ngIf="puedeVerPagina">
+
+  <div class="container-fluid pb-2 pt-2" style="padding-left:0rem; padding-right:0rem;">
+
+      <!-- DataGrid Usuarios -->
+      <div class="card mb-4" [style]="{'height':'18rem'}">
+        <div class="card-body p-0">
+          <div class="table-responsive border rounded "
+            style="max-height:18rem; height: 18rem; padding-top:0rem; margin-top:0rem; overflow-y:hidden;">
+            <h6 class="text-center p-1 m-0 tituloTabla" [style]="{'height':'2rem'}">Usuarios</h6>
+            <p-table [scrollable]="true" scrollHeight="18rem" [value]="usuarios"  stripedRows [tableStyle]="{ 'min-width': '50rem', 'padding': '0rem' }"
+              class="table table-sm m-0" [resizableColumns]="true" selectionMode="single">
+              <ng-template #header>
+                <tr>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">ID Usuario</th>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">Cédula</th>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">Nombre</th>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">Usuario</th>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">Contraseña</th>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">Tipo Usuario</th>
+                  <th pResizableColumn style="white-space: nowrap; padding: 0.3rem;">Accciones</th>
+                </tr>
+              </ng-template>
+      
+              <ng-template #body let-Usuario>
+                <tr pSelectableRow  (click)="ControlClick($event, Usuario)" 
+                [ngClass]="{ 'fila-seleccionada': usuarioSeleccionado?.idUsuario === Usuario.idUsuario }">
+                  <td style="white-space: nowrap; padding: 0.2rem;"> {{ Usuario.idUsuario }}</td>
+                  <td style="white-space: nowrap; padding: 0.2rem;">{{Usuario.documentoIdentidad }} </td>
+                  <td style="white-space: nowrap; padding: 0.2rem;">{{Usuario.nombre }} {{Usuario.apellido}}</td>
+                  <td style="white-space: nowrap; padding: 0.2rem;"> {{Usuario.nombreUsuario }}</td>
+                  <td style="white-space: nowrap; padding: 0.2rem;">{{Usuario.contrasena }}</td>
+                  <td style="white-space: nowrap; padding: 0.2rem;">{{Usuario.tipoUsuario }}</td>
+                  <td style="white-space: nowrap; padding: 0.2rem; text-align: center;">
+                    <!-- Botón para resetear intentos -->
+                    <button pButton
+                            icon="pi pi-refresh"
+                            class="p-button p-button-outlined p-button-sm p-button-info"
+                            style="width: 1.5rem; height: 1.5rem; padding: 0; margin-right: 0.2rem;"
+                            title="Resetear Intentos"
+                            (click)="resetearIntentos(Usuario); $event.stopPropagation()">
+                    </button>
+                  
+                    <!-- Botón para activar/desactivar usuario -->
+                    <button pButton
+                            [icon]="Usuario.estado ? 'pi pi-user-minus' : 'pi pi-user-plus'"
+                            [class]="'p-button p-button-outlined p-button-sm'"
+                            [severity]="Usuario.estado? 'success':'danger'"
+                            style="width: 1.5rem; height: 1.5rem; padding: 0; margin-left: 0.2rem;"
+                            [title]="Usuario.estado ? 'Desactivar Usuario':'Activar Usuario'"
+                            (click)="cambiarEstadoUsuario(Usuario); $event.stopPropagation()">
+                    </button>
+                  </td>
+                  
+                  
+                  
+                  
+                </tr>
+              </ng-template>
+            </p-table>
+      
+          </div>
+      
+        </div>
+      
+      </div>
+      
+      <!-- Crud Usuarios -->
+      <div class="card AlturaBodyUsuario1">
+
+        <div class="card-header AlturaHeader" style="height: 3rem; background: repeating-radial-gradient(#fff,#eeebebe6);">
+          <div class="d-flex justify-content-between align-items-center">
+        
+            <h6 class="mb-0">Gestión de Usuarios</h6>
+        
+            <span id="ErrorValidacion" style="color: red;"></span>
+        
+            <div class="contenedor-icono d-flex gap-2">
+
+              <!-- Nuevo Usuario -->
+              <button
+                pButton
+                [outlined]="true"
+                icon="pi pi-user-plus"
+                [disabled]="!estadoBotones.nuevo"
+                (click)="onNuevoUsuario()"
+                class="btn AzulActivo"
+                title="Nuevo Usuario">
+              </button>
+            
+              <!-- Guardar Usuario -->
+              <button
+                pButton
+                [outlined]="true"
+                icon="pi pi-save"
+                [disabled]="!estadoBotones.guardar"
+                (click)="guardarUsuario()"
+                [ngClass]="claseBotonGuardar"
+                title="Guardar">
+              </button>
+            
+              <!-- Modificar Usuario -->
+              <button
+                pButton
+                [outlined]="true"
+                icon="bi bi-pencil-square"
+                [disabled]="!estadoBotones.editar"
+                (click)="onEditarUsuario()"
+                [ngClass]="claseBotonEditar"
+                title="Modificar Usuario">
+              </button>
+            
+              <!-- Refrescar -->
+              <button
+                pButton
+                [outlined]="true"
+                icon="bi bi-arrow-repeat"
+                [disabled]="!estadoBotones.refrescar"
+                (click)="onRefrescar()"
+                class="btn AzulActivo"
+                title="Refrescar">
+              </button>
+            
+            </div>
+            
+        
+          </div>
+        </div>
+
+        <div class="card-body" [formGroup]="formUsuario">
+
+          <!-- Fila 1 -->
+          <div class="row g-3 pb-3">
+
+            <div class="col-md-4">
+              <p-floatlabel variant="on">
+                <input pInputText  id="nombre" formControlName="nombre" size="small"  class="p-inputtext-sm w-100" />
+                <label for="nombre">Nombre</label>
+             </p-floatlabel>
+            </div>
+        
+            <div class="col-md-4">
+              <p-floatlabel variant="on">
+                <input pInputText id="apellido" formControlName="apellido" size="small"  class="p-inputtext-sm w-100" />
+                <label for="apellido">Apellidos</label>
+             </p-floatlabel>
+            </div>
+
+            <div class="col-md-4">
+              <p-floatlabel variant="on">
+                <input pInputText id="documentoIdentidad" formControlName="documentoIdentidad" size="small"   class="p-inputtext-sm w-100" />
+                <label for="documentoIdentidad">Cédula</label>
+             </p-floatlabel>
+            </div>
+          </div>
+        
+         <!-- Fila 2 -->
+         <div class="row g-3 pb-3">
+
+
+          <div class="col-md-4">
+            <p-floatlabel variant="on">
+              <input pInputText id="nombreUsuario" formControlName="nombreUsuario" size="small"   class="p-inputtext-sm w-100" />
+              <label for="nombreUsuario">Usuario</label>
+           </p-floatlabel>
+          </div>
+
+          <div class="col-md-4">
+            <p-floatlabel variant="on">
+              <input pInputText id="contrasena" formControlName="contrasena" size="small"   class="p-inputtext-sm w-100" />
+              <label for="contrasena">Constraseña</label>
+           </p-floatlabel>
+          </div>
+
+          <div class="col-md-4">
+            <p-floatlabel variant="on">
+              <p-select
+                [style]="{'height':'2.1rem'}"
+                inputId="tipoUsuario"
+                formControlName="tipoUsuario"
+                [options]="TipoUsuarios"
+                optionLabel="label"
+                optionValue="value"
+                class="w-100"
+              ></p-select>
+              <label for="tipoUsuario">Tipo Usuario</label>
+            </p-floatlabel>
+            
+            
+          </div>
+        </div>
+
+        </div>
+        
+      </div>
+
+  </div>
+</div>
+
+
+<!-- Modal para Permisos-->
+<p-dialog [(visible)]="VisibilidadModalPermiso"
+          [modal]="true"
+          [style]="{ width: '60vw' }"
+          [closable]="true"
+          [resizable]="false"
+          header="Gestión de Permisos">
+
+  <div class="card mb-4" style="height: auto; display: flex; flex-direction: column;">
+    <h6 class="text-center p-2 m-0 tituloTabla" style="flex: 0 0 auto;">Permisos</h6>
+
+    <!-- Tabla Permisos -->
+    <div style="flex: 1 1 auto; overflow-y: auto;">
+      <p-table [value]="permisos"
+               [scrollable]="true"
+               [tableStyle]="{ width: '100%' }"
+               scrollHeight="flex"
+               stripedRows
+               [resizableColumns]="true"
+               selectionMode="single">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn style="width: 60px; text-align: center;">Asignado</th>
+            <th pResizableColumn style="width: 100px; text-align: center;">ID Permiso</th>
+            <th pResizableColumn style="white-space: nowrap;">Descripción</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-permiso>
+          <tr>
+            <td style="text-align: center;">
+              <p-checkbox [(ngModel)]="permiso.asignado" binary="true"></p-checkbox>
+            </td>
+            <td style="text-align: center;">{{ permiso.idPermiso }}</td>
+            <td>{{ permiso.descripcion }}</td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+  </div>
+
+  <!-- Boton para grabar  -->
+  <ng-template pTemplate="footer">
+    <button pButton label="Guardar Cambios"  icon="pi pi-save" class="p-button-success " (click)="guardarPermisosUsuario()">
+    </button>
+  </ng-template>
+
+</p-dialog>

@@ -1,0 +1,177 @@
+/* Para pantallas de hasta 1920px de altura */
+@media (max-height: 1920px) {
+    #ContenedorUsuario {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+  
+    .AlturaBodyUsuario1 {
+        height: 50rem;
+    }
+  
+  }
+  
+  /* Para pantallas de hasta 1024px de altura */
+  @media (max-height: 1024px) {
+    #ContenedorUsuario {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+  
+    .AlturaBodyUsuario1 {
+        height: 45rem;
+    }
+  
+  }
+  
+  /* Para pantallas de hasta 800px de altura */
+  @media (max-height: 800px) {
+    #ContenedorUsuario {
+        width: 95%;
+        padding-right: var(--bs-gutter-x, 0.75rem);
+        padding-left: var(--bs-gutter-x, 0.75rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
+  
+    .AlturaBodyUsuario1 {
+        height: auto;
+    }
+  
+    .AlturaBodyPermiso1 {
+        height: auto;
+    }
+  }
+  
+  /* Para pantallas de hasta 600px de altura */
+  @media (max-height: 600px) {
+    #ContenedorUsuario {
+        width: 95%;
+        padding-right: var(--bs-gutter-x, 0.75rem);
+        padding-left: var(--bs-gutter-x, 0.75rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
+  
+    .AlturaBodyUsuario1 {
+        height: auto;
+    }
+  
+  }
+  
+  .btn {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    /* Sombra sutil por defecto */
+    cursor: pointer;
+    background-color: transparent;
+  }
+  
+  .btn:disabled {
+      height: 2rem;
+      width: 2rem;
+      background-color: #f0f0f0 !important;
+      color: #aaa !important;
+      border: 1px solid #ddd !important;
+      box-shadow: none !important;
+      cursor: not-allowed;
+      opacity: 0.7;
+  }
+  
+  
+    
+  .AzulActivo {
+    border: solid 1px rgba(8, 99, 164, 0.3);
+    color: #0863a4;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease-in-out;
+  }
+  
+  .AzulActivo:hover {
+    background-color: rgba(8, 99, 164, 0.1); /* azul muy suave */
+    box-shadow: 
+      0 2px 6px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(8, 99, 164, 0.3); /* borde interno suave */
+    transform: scale(1.02);
+    color: #064b7e;
+    border: 1px solid rgba(8, 99, 164, 0.4); /* refuerzo sutil */
+  }
+  
+  
+  .VerdeActivo {
+      border: solid 1px rgba(40, 99, 65, 0.5); /* Color rojo con transparencia */
+      color: #00c365;
+      height: 2rem;
+      width: 2rem;
+      border-radius: 4px; /* Bordes redondeados */
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  .VerdeActivo:hover {
+      height: 2.1rem;
+      width: 2.1rem;
+      background-color: #00c365 !important; /* Fondo más oscuro al pasar el cursor */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el cursor */
+      transform: scale(1.05); /* Aumenta el tamaño ligeramente */
+      color: white;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  }
+  
+  
+  .tituloTabla {
+      font-weight: bold;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      background: radial-gradient(circle, #4a90e2, #1c355e); /* Se puede poner color diferente */
+      color: white;
+      padding: 0.5rem 0;
+    }
+  
+  
+    .table-responsive {
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      background-color: #f9f9f9;
+      overflow-y: auto;
+    }
+    
+  
+    p-table table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    
+    p-table th {
+      text-align: left;
+      background-color: #cedbf4;
+      color: #181818;
+      font-weight: 600;
+      padding: 0.5rem;
+      border-bottom: 2px solid #ddd;
+    }
+  
+    /* Revisar color de seleccion de la fila  */
+    .fila-seleccionada {
+      background-color: #99cdf5 !important; /* Azul claro */
+    }
+    
+    
+    
+    
+   
+   
+  

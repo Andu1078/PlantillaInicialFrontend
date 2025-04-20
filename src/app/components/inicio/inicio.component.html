@@ -1,0 +1,46 @@
+<p-toast></p-toast>
+<div class="container-fluid  mt-2" [attr.translate]="'no'">
+    <p-menubar [model]="menubaritems" class="bg-danger" >
+     
+      <ng-template #start>
+      <img 
+          width="40" 
+          height="40" 
+          src="assets/Logo.png" 
+          alt="Logo" 
+          class="rounded-circle"
+          title="Caribeñita Tour">
+      </ng-template>
+     
+     
+      <ng-template #end>
+        <span  class="user-name" title="Usuario del Sistema">{{usuario}}</span> 
+        <button 
+        pButton 
+        type="button" 
+        icon="pi pi-sign-out" 
+        class="p-button-rounded p-button-text me-2"
+        (click)="cerrarSesion()"
+        style="font-size: 0.5rem;" title="Cerrar Session">
+       </button>
+      </ng-template>
+
+    </p-menubar>
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

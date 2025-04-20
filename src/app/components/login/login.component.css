@@ -1,0 +1,143 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Fondo general */
+  body {
+    background: linear-gradient(45deg, #171a1e, #6487b7); /* Fondo suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Contenedor principal */
+  .login-container {
+    display: flex;
+    width: 43rem;  /* Tamaño cuadrado */
+    height: 33rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 0.7rem;
+    overflow: hidden;
+    background: white; /* Color de fondo del login */
+  }
+  
+  /* Parte izquierda (Formulario) */
+  .login-form {
+    width: 50%;
+    padding: 1.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Logo */
+  .logo img {
+    width: 10rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  /* Formulario */
+  .form-group {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  /* Parte derecha (Imagen corporativa) */
+  .corporate-image {
+    width: 50%;
+  }
+  
+  .corporate-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    body {
+      padding: 20px;
+    }
+  
+    .login-container {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+    }
+  
+    .login-form {
+      width: 100%;
+      height: auto;
+    }
+  
+    /* Ocultar imagen en pantallas pequeñas */
+    .corporate-image {
+      display: none;
+    }
+  }
+  
+  
+  /* Evitar que el formulario afecte el tamaño de los elementos internos */
+  .login-form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Asegurar que los inputs dentro del form mantengan el mismo ancho */
+  .login-form .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; /* Ajusta el tamaño si es necesario */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Asegurar que el botón no se reduzca dentro del form */
+  .login-form .form-group button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .custom-spinner {
+    width: 60px;
+    height: 60px;
+  }
+  

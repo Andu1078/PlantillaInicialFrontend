@@ -1,0 +1,44 @@
+<p-toast></p-toast>
+
+<div class="login-container">
+  <div class="login-form">
+    <div class="logo">
+      <img src="assets/Logo.png" alt="Logo de la empresa" />
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="IniciarSesion()">
+
+      <!-- Usuario -->
+      <div class="form-group">
+        <p-floatLabel variant="on">
+          <input id="Usuario" type="text" pInputText formControlName="Usuario"  autocomplete="username" />
+          <label for="Usuario">Usuario</label>
+        </p-floatLabel>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="form-group">
+        <p-floatLabel variant="on">
+          <p-password id="Contrasena" type="password" [feedback]="false"  autocomplete="current-password" [toggleMask]="true" [style]="{'width':'100%'}" formControlName="Contrasena" />
+          <label for="Contrasena">Contraseña</label>
+        </p-floatLabel>
+      </div>
+
+      <!-- Botón de inicio -->
+      <div class="form-group mt-4">
+        <button pButton type="submit" label="Iniciar sesión" class="w-full"></button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Imagen corporativa -->
+  <div class="corporate-image">
+    <img src="assets/Fondo.jpg" alt="Imagen corporativa" />
+  </div>
+</div>
+
+<!-- Spinner -->
+<div *ngIf="loading" class="spinner-overlay">
+  <p-progressSpinner strokeWidth="3" styleClass="custom-spinner"></p-progressSpinner>
+</div>
